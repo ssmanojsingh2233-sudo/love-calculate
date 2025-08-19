@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Calculator ❤️</title>
+  
+</head><script>
+function calculateLove() {
+  const yourName = document.getElementById("yourName").value.trim();
+  const partnerName = document.getElementById("partnerName").value.trim();
+  const result = document.getElementById("result");
+  const shareBtn = document.getElementById("whatsappShare");
+
+  if (yourName === "" || partnerName === "") {
+    result.innerHTML = "Pehle dono ke naam daalna toh padega jani! 😅";
+    shareBtn.style.display = "none";
+    return;
+  }
+
+  const lovePercent = Math.floor(Math.random() * 21) + 80; // 80–100%
+  const messages = [
+    "Aap dono rab ne bana di jodi ho 💞",
+    "Ye ishq nahi aasan jani, lekin tum dono ke liye sab kuch mumkin hai! 💘",
+    "Duniya ki sabse cute jodi ❤️",
+    "Tum dono ek hi dil ke do tukde ho 💓",
+    "Aisa pyaar filmon me bhi nahi hota 😍",
+    "Tum dono ke beech sirf mohabbat bolti hai 🥰",
+    "Tumhara pyaar... world record tod de jani 💯"
+  ];
+  const msg = messages[Math.floor(Math.random() * messages.length)];
+
+  const finalMessage = `${yourName} ❤️ ${partnerName} = ${lovePercent}%\n\n${msg}`;
+
+  result.innerHTML = finalMessage.replace(/\n/g, "<br>");
+  shareBtn.style.display = "inline-block";
+
+  // Store the message for WhatsApp share
+  shareBtn.setAttribute("data-message", finalMessage);
+}
+
+function shareOnWhatsApp() {
+  const msg = document.getElementById("whatsappShare").getAttribute("data-message");
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(whatsappUrl, "_blank");
+}
+</script>
+<style>
+body {
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
+  max-width: 400px;
+  margin: auto;
+}
+
+h1 {
+  color: #ff4081;
+  animation: pulse 2s infinite;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  border: 2px solid #ff4081;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #e91e63;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #880e4f;
+  font-weight: bold;
+}
+
+/* Beating Heart Animation */
+.heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  margin: 20px auto;
+  animation: heartbeat 1s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 90px;
+  background: #ff1744;
+  border-radius: 50px 50px 0 0;
+  top: 0;
+  left: 0;
+}
+
+.heart::before {
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart::after {
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); color: #f50057; }
+  100% { transform: scale(1); }
+}
+</style>
+<body>
+  <div class="container">
+    <h1>💖 Love Calculator 💖</h1>
+    
+    <div class="heart"></div>
+
+    <input type="text" id="yourName" placeholder="Your Name">
+    <input type="text" id="partnerName" placeholder="Babu's Name">
+    <button onclick="calculateLove()">Calculate Love</button>
+    
+    <div id="result" class="animated"></div>
+
+    <!-- WhatsApp Share Button -->
+    <button id="whatsappShare" style="display:none;" onclick="shareOnWhatsApp()">💌 Share on WhatsApp</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
